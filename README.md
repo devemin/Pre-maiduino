@@ -32,7 +32,7 @@ Pre-maid AI x Arduino STM32 collaboration
 
 # 参考情報
 
-超速ハックの @GOROman さんによる解析データです。基板回路写真もあります。
+超速ハックの @GOROman さんによる解析データです。ピンアサイン、基板回路写真もあります。
 
 https://docs.google.com/spreadsheets/d/1c6jqMwkBroCuF74viU_q7dgSQGzacbUW4mJg-957_Rs/edit#gid=191676625
 
