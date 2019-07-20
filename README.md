@@ -176,7 +176,9 @@ Arduino\arduino-1.8.8\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd3
 <code>
 
 //物理的接続はPA9?
+
 const byte EN_PIN = PA2;
+
 const long BAUDRATE = 1250000;
 
 IcsHardSerialClass krs(&Serial1,EN_PIN,BAUDRATE,TIMEOUT);  //インスタンス＋ENピン(2番ピン)およびUARTの指定
@@ -186,6 +188,7 @@ IcsHardSerialClass krs(&Serial1,EN_PIN,BAUDRATE,TIMEOUT);  //インスタンス�
 //物理的接続はPA2?
 
 const byte EN_PIN = PA9;
+
 const long BAUDRATE = 1250000;
 
 IcsHardSerialClass krs(&Serial2,EN_PIN,BAUDRATE,TIMEOUT);  //インスタンス＋ENピン(2番ピン)およびUARTの指定
@@ -222,6 +225,7 @@ ZHコネクタの圧着は専用器具を使った方が良さそうです。大
 
 
 # 注意点
+
 (私はプリメイドAI自体がまだ届いていませんので、あくまで自作のSTM32F102ボード向けの情報となっています。)
 
 (メーカー様に怒られない範囲で)ワクワク楽しくハックしていきたいと思います！
