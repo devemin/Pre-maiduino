@@ -135,7 +135,7 @@ https://scrapbox.io/ArduinoSTM32/Arduino_STM32_%E3%83%AA%E3%83%95%E3%82%A1%E3%83
 
 ちなみに、ArduinoでなくST社公式の「STM32CubeIDE」というソフトでも開発を進めることができます。
 
-@sabotenboy さんの情報によると、この方の個体は先ほどのProgrammerソフトで確認するとflashが128k あったそうです。
+@sabotenboy さんと@hanyazou さんの情報によると、先ほどのProgrammerソフトで確認すると個体によってはflashが128k の場合があるみたいです。
 
 私がDigikeyで買ったIC個体はスペック通り64kでした。
 
