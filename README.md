@@ -25,7 +25,7 @@ Pre-maid AI x Arduino STM32 collaboration
 
 保護のかかったファームを書き換え後は、元ファームは消去され、保存できません。
 
-間違いや追加などがありましたら、シェア致しますのでお教えください。
+間違いや追加などがありましたら、シェア致しますのでお教えください(^^)
 
 このページは、あくまで私が作った<b> F102 </b>ボード向けの情報となっている体裁ですのでよろしくお願いします。
   
@@ -105,7 +105,7 @@ https://twitter.com/devemin/status/1150963921752215552?s=20
 
 →　https://github.com/rogerclarkmelbourne/Arduino_STM32/
 
-Arduino IDE ディレクトリに、Arduino/hardware/Arduino_STM32-master/ という形になるようにフォルダごとコピー。
+Arduino IDE ディレクトリに、hardware/Arduino_STM32-master/ という形になるようにフォルダごとコピー。
 
 その後Arduino IDEを起動すると、メニューのツール→ボード　に「Generic STM32F103C series」が追加されていますので選択。
 
@@ -187,7 +187,7 @@ Serial3がうまく接続できなくて調査中です。
 
 処理はこちらに書いてありました。
 
-Arduino\arduino-1.8.8\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd32f103c\board.cpp
+\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd32f103c\board.cpp
 
 さて、サンプルコードの修正箇所です。
 
