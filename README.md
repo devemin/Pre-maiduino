@@ -15,7 +15,7 @@ Pre-maid AI x Arduino STM32 collaboration
 
 どちらもほぼ同じスペックのため、対象が違っても動作しているようです。
 
-（スペック比較はこちらのツイート　→　https://twitter.com/devemin/status/1151756254835986432?s=20）
+（スペック比較はこちらのツイート　→　https://twitter.com/devemin/status/1151756254835986432?s=20 ）
 
 また、ファーム書き換えは自己責任にてお願いします。
 
