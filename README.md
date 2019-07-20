@@ -42,6 +42,8 @@ https://twitter.com/GOROman/status/1151046658354032640?s=19
 
 ST公式データシート
 
+https://www.stmcu.jp/stm32/stm32f102/
+
 F102 F103はピン配置は全く同じのようです（LQFP48）
 
 BluePill 回路図(ちなみに私の自作ボードは、このBluePillの103を102に載せかえたものです。)
