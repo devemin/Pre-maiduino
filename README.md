@@ -40,6 +40,10 @@ ST公式データシート
 
 F102 F103はピン配置は全く同じのようです（LQFP48）
 
+BluePill 回路図(ちなみに私の自作ボードは、このBluePillの103を102に載せかえたものです。)
+
+https://wiki.stm32duino.com/images/a/ac/Stm32f103c8t6_schematic.png
+
 # 環境構築
 
 書き換えに必要なものは、ST Linkというアダプタです。
