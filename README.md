@@ -120,13 +120,13 @@ https://scrapbox.io/ArduinoSTM32/Arduino_STM32_%E3%83%AA%E3%83%95%E3%82%A1%E3%83
 
 setup() で
 
-Serial2.begin(115200);
+Serial1.begin(115200);
 
 読取処理で
 
-Serial2.print("hoge");
+Serial1.print("hoge");
 
-などでBluetooth 接続のホスト相手にデータを送信できます。  
+などでBluetooth 接続のホスト相手にデータを送信できるはずです。
 
 </code>
 
@@ -134,11 +134,13 @@ Serial2.print("hoge");
 
 # 近藤科学サーボ　公式ライブラリ
 
-公式のサンプル KrsServo1 はそのままですと動きません。変数を&Serial から&Serial1 等に変更してください。
+https://kondo-robot.com/archives/15255
 
-USART1,3 がシリアルサーボに接続されているようです。
+公式のサンプル KrsServo1 はそのままですと動きません。<b>変数を&Serial から&Serial1</b> 等に変更してください。
 
-USART2 はBluetooth チップRN42につながっています。
+USART2,3 がシリアルサーボに接続されているようです。
+
+USART1 はBluetooth チップRN42につながっています。
 
 Serial3がうまく接続できなくて調査中です。
 
@@ -153,7 +155,6 @@ Arduino\arduino-1.8.8\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd3
 <code>
 
 //物理的接続はPA9?
-
 const byte EN_PIN = PA2;
 const long BAUDRATE = 1250000;
 
@@ -178,11 +179,15 @@ Arduino\arduino-1.8.8\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd3
 
 </code>
 
+私のボードだと、なぜかピン対応が入れ替わっていて、上記で通信できたのですが、詳細不明確認中です。
+
 （書き込み方法をST LinkでなくSerialケーブルで書き込む方は、この処置はいりません。）
 
 # ジャイロ MPU-6050 について
 
 こちらのサイトを参考にさせてもらおうと思っています。
+
+Arduino でMPU-6050をドリフト防止している例の記事です。
 
 https://qiita.com/Qikoro/items/d24057b434c44fcdf74e
 
@@ -192,7 +197,7 @@ https://qiita.com/Qikoro/items/d24057b434c44fcdf74e
 
 周辺機器接続あるいは他端末と高速通信が出来るとおもいます。
 
-
+ZHコネクタの圧着は専用器具を使った方が良さそうです。大きめの圧着器具では全然作れませんでした・・・。
 
 
 # 注意点
