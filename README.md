@@ -34,6 +34,8 @@ Pre-maid AI x Arduino STM32 collaboration
 
 https://docs.google.com/spreadsheets/d/1c6jqMwkBroCuF74viU_q7dgSQGzacbUW4mJg-957_Rs/edit#gid=191676625
 
+https://twitter.com/GOROman/status/1151046658354032640?s=19
+
 ST公式データシート
 
 F102 F103はピン配置は全く同じのようです（LQFP48）
