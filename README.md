@@ -219,7 +219,7 @@ Arduino\arduino-1.8.8\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd3
 
 こちらのサイトを参考にさせてもらおうと思っています。
 
-Arduino でMPU-6050をドリフト防止している例の記事です。
+Arduino でMPU-6050をカルマンフィルタを用いてドリフト防止している例の記事です。
 
 https://qiita.com/Qikoro/items/d24057b434c44fcdf74e
 
