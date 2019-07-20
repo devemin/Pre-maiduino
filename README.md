@@ -156,6 +156,17 @@ Serial3がうまく接続できなくて調査中です。
 
 先程の翻訳リファレンスによると、書き込み方法が変わると、Serialの扱いが変わるようです。
 
+翻訳リファレンスの「シリアル通信」の項目を参照。
+
+
+<code>
+  
+ [USBSerial] クラス([usb_serial.h https://github.com/rogerclarkmelbourne/Arduino_STM32/blob/master/STM32F1/cores/maple/usb_serial.h])				実装済オブジェクト：`Serail`(*1)
+ 
+ [HardwareSerial] クラス([HardwareSerial.h https://github.com/rogerclarkmelbourne/Arduino_STM32/blob/master/STM32F1/cores/maple/HardwareSerial.h])	実装済オブジェクト：`Serial1`,`Serial2`,`Serial3`, ... `SerialN`
+
+</code>
+
 処理はこちらに書いてありました。
 
 Arduino\arduino-1.8.8\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd32f103c\board.cpp
