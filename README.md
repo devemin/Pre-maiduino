@@ -250,6 +250,8 @@ Arduino\arduino-1.8.8\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd3
 
 ~~通常のシリアル通信（Serial1.begin などは入れ替わってませんでしたのでライブラリ要確認中）~~
 
+（書き込み方法をST LinkでなくSerialケーブルで書き込む方は、この処置はいりません。）
+
 勘違いしてました。Arduino ライブラリでは、1-wire 半二重シリアル通信の想定ではありません。
 
 TX/RX/EN_PIN の3線です。回路はICS 3.5/3.6 ソフトウェアマニュアルを参照ください。
@@ -257,8 +259,6 @@ TX/RX/EN_PIN の3線です。回路はICS 3.5/3.6 ソフトウェアマニュア
 なぜ上記コードでサーボが動くのか、逆に謎ですｗ
 
 現在、1-wire USART をArduinoで使う方法を調査中。STM32CubeIDEなら簡単に設定できるんですがね・・・
-
-（書き込み方法をST LinkでなくSerialケーブルで書き込む方は、この処置はいりません。）
 
 # ジャイロ MPU-6050 について
 
