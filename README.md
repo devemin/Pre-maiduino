@@ -157,7 +157,7 @@ http://nopnop2002.webcrow.jp/STM32F103/SMT32F103-61.html
 
 https://qiita.com/nanbuwks/items/5a01b924b192d5d36b31
 
-シリアル通信は、ST Linkを使う場合はSerial.begin でなく、Serial1.begin　などとして使います。
+シリアル通信は、ST Linkで書き込む場合はSerial.begin でなく、Serial1.begin　などとして使います。
 
 Serial1, Serial2, Serial3 がUSART1-3 に対応しているかと思われます。（近藤科学サーボライブラリでは不明点あり、後述参照
 ）
@@ -246,9 +246,17 @@ Arduino\arduino-1.8.8\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd3
 
 </code>
 
-私のボードだと、なぜかピン対応が入れ替わっていて、物理接続を入れ替わった場所に接続し、上記で通信できたのですが、詳細不明確認中です。
+~~私のボードだと、なぜかピン対応が入れ替わっていて、物理接続を入れ替わった場所に接続し、上記で通信できたのですが、詳細不明確認中です。~~
 
-通常のシリアル通信（Serial1.begin などは入れ替わってませんでしたのでライブラリ要確認中）
+~~通常のシリアル通信（Serial1.begin などは入れ替わってませんでしたのでライブラリ要確認中）~~
+
+勘違いしてました。Arduino ライブラリでは、1-wire 半二重シリアル通信の想定ではありません。
+
+TX/RX/EN_PIN の3線です。回路はICS 3.5/3.6 ソフトウェアマニュアルを参照ください。
+
+なぜ上記コードでサーボが動くのか、逆に謎ですｗ
+
+現在、1-wire USART をArduinoで使う方法を調査中。STM32CubeIDEなら簡単に設定できるんですがね・・・
 
 （書き込み方法をST LinkでなくSerialケーブルで書き込む方は、この処置はいりません。）
 
