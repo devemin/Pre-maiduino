@@ -141,11 +141,13 @@ https://scrapbox.io/ArduinoSTM32/Arduino_STM32_%E3%83%AA%E3%83%95%E3%82%A1%E3%83
 
 https://twitter.com/Sabotenboy/status/1152479068165562368?s=19
 
+# ピンのリマップについて
+
 Pin機能を変更できるリマップ( remap ）機能というものがあります。
 
 STM32データシートのピンアサインのページに変更できるピンが書いてあります。
 
-こちらのページの方は、SPIを設定しておられます。
+afio_remap()で変更できるようですので、こちらのページの方をご参照ください。
 
 http://nopnop2002.webcrow.jp/STM32F103/SMT32F103-61.html
 
