@@ -141,6 +141,25 @@ https://scrapbox.io/ArduinoSTM32/Arduino_STM32_%E3%83%AA%E3%83%95%E3%82%A1%E3%83
 
 https://twitter.com/Sabotenboy/status/1152479068165562368?s=19
 
+Pin機能を変更できるリマップ( remap ）機能というものがあります。
+
+STM32データシートのピンアサインのページに変更できるピンが書いてあります。
+
+こちらのページの方は、SPIを設定しておられます。
+
+http://nopnop2002.webcrow.jp/STM32F103/SMT32F103-61.html
+
+# シリアル通信について
+
+参考：　STM32 を Arduino 開発環境で使う場合のシリアルポートの調査 （STM32duino + STM32F103C8 : Blue Pill)
+
+https://qiita.com/nanbuwks/items/5a01b924b192d5d36b31
+
+シリアル通信は、ST Linkを使う場合はSerial.begin でなく、Serial1.begin　などとして使います。
+
+Serial1, Serial2, Serial3 がUSART1-3 に対応しているかと思われます。（近藤科学サーボライブラリでは不明点あり、後述参照
+）
+
 # Bluetooth RN42
 
 シリアル接続ですので簡単です。
@@ -154,9 +173,13 @@ Serial1.begin(115200);
 
 Serial1.print("hoge");
 
+</code>
+
 などでBluetooth 接続のホスト相手にデータを送信できるはずです。
 
-</code>
+
+下記近藤科学サーボ
+
 
 # 各種ライブラリの使い方(近藤科学ICSサーボ、ジャイロMPU-6050など)
 
@@ -221,7 +244,9 @@ Arduino\arduino-1.8.8\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd3
 
 </code>
 
-私のボードだと、なぜかピン対応が入れ替わっていて、上記で通信できたのですが、詳細不明確認中です。
+私のボードだと、なぜかピン対応が入れ替わっていて、物理接続を入れ替わった場所に接続し、上記で通信できたのですが、詳細不明確認中です。
+
+通常のシリアル通信（Serial1.begin などは入れ替わってませんでしたのでライブラリ要確認中）
 
 （書き込み方法をST LinkでなくSerialケーブルで書き込む方は、この処置はいりません。）
 
