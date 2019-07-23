@@ -201,7 +201,15 @@ Serial1.print("hoge");
 
 ボード設定などは前述の通りです。（Generic STM32F103 Series, ST Link, 48Mhz etc）
 
+参考：
 
+ST公式　日本語リファレンス　文書番号0008
+
+https://www.stmcu.jp/design/document/reference_manual_j/
+
+Arduino STM32 リファレンス 日本語版　USART support(usart.h)
+
+https://scrapbox.io/ArduinoSTM32/USART_support(usart.h)
 
 # 近藤科学サーボ　公式ライブラリ
 
