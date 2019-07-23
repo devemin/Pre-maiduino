@@ -183,82 +183,43 @@ Serial1.print("hoge");
 下記近藤科学サーボ
 
 
-# 各種ライブラリの使い方(近藤科学ICSサーボ、ジャイロMPU-6050など)
+# 各種ライブラリの使い方(当ページでのICS動作サンプル、近藤科学ICSサーボ、ジャイロMPU-6050など)
+
+# ICS動作サンプル
+
+データシートを読んでレジスタいじり、やってみました。
+
+1線式USARTシリアル通信をするには必要でした。（通常のTX/RX 2線式回路ならこんな処理は必要なかった）
+
+当ディレクトリの ICS_test.ino を Arduino IDEにて書き込みしてください。
+
+（素人のグチャグチャ記載コードです・・・　レジスタの処理の参考にでもお使い下さい・・・）
+
+-> ICS_test.ino
+
+<Link>https://github.com/devemin/Pre-maiduino/ICS_test.ino</Link>
+
+ボード設定などは前述の通りです。（Generic STM32F103 Series, ST Link, 48Mhz etc）
+
+
 
 # 近藤科学サーボ　公式ライブラリ
 
 https://kondo-robot.com/archives/15255
 
-公式のサンプル KrsServo1 はそのままですと動きません。<b>変数を&Serial から&Serial1</b> 等に変更してください。
+これは1-wire 半二重シリアル通信の想定ではありません。そのまま使うことはできません。
+
+TX/RX/EN_PIN の3線です。回路はICS 3.5/3.6 ソフトウェアマニュアルを参照ください。
 
 USART2,3 がシリアルサーボに接続されているようです。
 
 USART1 はBluetooth チップRN42につながっています。
-
-Serial3がうまく接続できなくて調査中です。
-
-先程の翻訳リファレンスによると、書き込み方法が変わると、Serialの扱いが変わるようです。
-
-翻訳リファレンスの「シリアル通信」の項目を参照。
-
-
-<code>
-  
- [USBSerial] クラス([usb_serial.h https://github.com/rogerclarkmelbourne/Arduino_STM32/blob/master/STM32F1/cores/maple/usb_serial.h])				実装済オブジェクト：`Serail`(*1)
- 
- [HardwareSerial] クラス([HardwareSerial.h https://github.com/rogerclarkmelbourne/Arduino_STM32/blob/master/STM32F1/cores/maple/HardwareSerial.h])	実装済オブジェクト：`Serial1`,`Serial2`,`Serial3`, ... `SerialN`
-
-</code>
-
-処理はこちらに書いてありました。
-
-\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd32f103c\board.cpp
-
-さて、サンプルコードの修正箇所です。
-
-<code>
-
-//物理的接続はPA9?
-
-const byte EN_PIN = PA2;
-
-const long BAUDRATE = 1250000;
-
-IcsHardSerialClass krs(&Serial1,EN_PIN,BAUDRATE,TIMEOUT);  //インスタンス＋ENピン(2番ピン)およびUARTの指定
-
-//あるいは
-
-//物理的接続はPA2?
-
-const byte EN_PIN = PA9;
-
-const long BAUDRATE = 1250000;
-
-IcsHardSerialClass krs(&Serial2,EN_PIN,BAUDRATE,TIMEOUT);  //インスタンス＋ENピン(2番ピン)およびUARTの指定
-
-//Serial3は調査中
 
 ピン対応は、
 
 Arduino\arduino-1.8.8\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd32f103c\board\board.h
 
 に記載があります。
-
-</code>
-
-~~私のボードだと、なぜかピン対応が入れ替わっていて、物理接続を入れ替わった場所に接続し、上記で通信できたのですが、詳細不明確認中です。~~
-
-~~通常のシリアル通信（Serial1.begin などは入れ替わってませんでしたのでライブラリ要確認中）~~
-
-~~（書き込み方法をST LinkでなくSerialケーブルで書き込む方は、この処置はいりません。）~~
-
-勘違いしてました。Arduino ライブラリでは、1-wire 半二重シリアル通信の想定ではありません。
-
-TX/RX/EN_PIN の3線です。回路はICS 3.5/3.6 ソフトウェアマニュアルを参照ください。
-
-なぜ上記コードでサーボが動くのか、逆に謎ですｗ　（EN_PINにTXを設定しまっているのに・・違うピンだし・・）
-
-現在、1-wire USART をArduinoで使う方法を調査中。STM32CubeIDEなら簡単に設定できるんですがね・・・
 
 # ジャイロ MPU-6050 について
 
@@ -267,6 +228,10 @@ TX/RX/EN_PIN の3線です。回路はICS 3.5/3.6 ソフトウェアマニュア
 Arduino でMPU-6050をカルマンフィルタを用いてドリフト防止している例の記事です。
 
 https://qiita.com/Qikoro/items/d24057b434c44fcdf74e
+
+また、DMPという当ICの独自機能にコーディングを加えることで、IC側に処理をさせ低ノイズ化など可能なようです。
+
+https://n.mtng.org/ele/arduino/tutorial024.html
 
 # ハードウェア追加について(SPI、I2Cなど)
 
