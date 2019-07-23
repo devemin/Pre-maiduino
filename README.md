@@ -233,6 +233,8 @@ https://qiita.com/Qikoro/items/d24057b434c44fcdf74e
 
 https://n.mtng.org/ele/arduino/tutorial024.html
 
+http://figrobo.blog.fc2.com/blog-entry-33.html
+
 # ハードウェア追加について(SPI、I2Cなど)
 
 プリメイドAIのボード上にはSPI端子用コネクタ（ZH）があるようです。
