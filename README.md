@@ -197,7 +197,7 @@ Serial1.print("hoge");
 
 -> ICS_test.ino
 
-<Link>https://github.com/devemin/Pre-maiduino/ICS_test.ino</Link>
+<Link>https://github.com/devemin/Pre-maiduino/blob/master/ICS_test.ino</Link>
 
 ボード設定などは前述の通りです。（Generic STM32F103 Series, ST Link, 48Mhz etc）
 
