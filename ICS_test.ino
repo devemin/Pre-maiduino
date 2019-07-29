@@ -32,7 +32,7 @@ void setup() {
   // put your setup code here, to run once:
 
   //Bluetooth RN42 用通信設定
-  Serial1.begin(921600);
+  Serial1.begin(115200);
 
   //ICSサーボ設定　信号線を起動時500msec Highにすることで、シリアル通信になる（PWM ×）
   digitalWrite(PA2, HIGH);
