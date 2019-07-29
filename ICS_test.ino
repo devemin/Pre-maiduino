@@ -6,7 +6,7 @@
  * 
  * Apache 2.0 License
  * 
- * 2019/7/24
+ * 2019/7/30
  * 
  * devemin
  * https://github.com/devemin
@@ -20,7 +20,7 @@
 
 
 //シリアル通信レジスタ
-struct usart_reg_map *regmap1 = USART1_BASE;
+//struct usart_reg_map *regmap1 = USART1_BASE;
 struct usart_reg_map *regmap3 = USART3_BASE;
 
 
