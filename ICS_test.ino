@@ -18,9 +18,13 @@
 
 #include <libmaple/usart.h>
 
+#define MV_MOTORNUM 4
+#define HV_MOTORNUM 1
+
+
 
 //シリアル通信レジスタ
-//struct usart_reg_map *regmap1 = USART1_BASE;
+struct usart_reg_map *regmap2 = USART2_BASE;
 struct usart_reg_map *regmap3 = USART3_BASE;
 
 
@@ -28,21 +32,29 @@ void setup() {
   // put your setup code here, to run once:
 
   //Bluetooth RN42 用通信設定
-  Serial1.begin(115200);
+  Serial1.begin(921600);
 
   //ICSサーボ設定　信号線を起動時500msec Highにすることで、シリアル通信になる（PWM ×）
+  digitalWrite(PA2, HIGH);
+  delay(505);
+  digitalWrite(PA2, LOW);
+  
   digitalWrite(PB10, HIGH);
   delay(505);
   digitalWrite(PB10, LOW);
 
   //ICSサーボ通信設定 (8bit,even)
+  Serial2.begin(1250000,SERIAL_8E1);
+  Serial2.setTimeout(500);
   Serial3.begin(1250000,SERIAL_8E1);
   Serial3.setTimeout(500);
 
   //1-wire USART 用設定　逆に設定すると動かない、不要？
+  //pinMode(PA2, OUTPUT_OPEN_DRAIN);
   //pinMode(PB10, OUTPUT_OPEN_DRAIN);
 
   //HDSELビットをオンにし、1-wire USARTを有効にする
+  regmap2->CR3 = regmap2->CR3 | 0b00000000000000000000000000001000;
   regmap3->CR3 = regmap3->CR3 | 0b00000000000000000000000000001000;
 
 
@@ -103,24 +115,31 @@ void loop() {
 
   //複数サーボ　ポジション値送信・戻り値テスト
   int movepos = 7000;
-  for (int a=500; a<=2000; a+=500) {
-    for (int b=1; b<=4; b++) {
-      SetICSServoPos(b, movepos - a);
-      SetICSServoPos(b, movepos + a);
+  for (int a=500; a<=1000; a+=250) {
+    for (int b=1; b<=MV_MOTORNUM; b++) {
+      SetICSServoPos(Serial3, b, movepos - a);
+      SetICSServoPos(Serial3, b, movepos + a);
+    }  
+    for (int c=1; c<=HV_MOTORNUM; c++) {
+      SetICSServoPos(Serial2, c, movepos - a);
+      SetICSServoPos(Serial2, c, movepos + a);
     }  
   }
 
   //複数サーボ　温度センサ読み出しテスト
 /*
-  for (int b=1; b<=4; b++) {
-    GetICSServoTemp(b);
-  }
+    for (int b=1; b<=MV_MOTORNUM; b++) {
+      GetICSServoTemp(Serial3, b);
+    }  
+    for (int c=1; c<=HV_MOTORNUM; c++) {
+      GetICSServoTemp(Serial2, c);
+    }  
 */
 
 }
 
 
-bool SetICSServoPos(uint8 id, uint16 pos) {
+bool SetICSServoPos(HardwareSerial &refSer, uint8 id, uint16 pos) {
 
   int rxSize;
   int rxLen = 3;
@@ -140,14 +159,16 @@ bool SetICSServoPos(uint8 id, uint16 pos) {
   txCmd[2] = (pos & 0x007F); //POS_L
 
   //TXビット　オン　/ RXビット　オフ
+  regmap2->CR1 = (regmap2->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000001000;
   regmap3->CR1 = (regmap3->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000001000;
   delay(10);
 
-  Serial3.flush();
-  Serial3.write(txCmd,3);
-  Serial3.flush();
+  refSer.flush();
+  refSer.write(txCmd,3);
+  refSer.flush();
 
   //TXビット　オフ　/ RXビット　オン
+  regmap2->CR1 = (regmap2->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000000100;
   regmap3->CR1 = (regmap3->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000000100;
   delay(10);
 
@@ -155,9 +176,9 @@ bool SetICSServoPos(uint8 id, uint16 pos) {
   rxCmd[1]=0;
   rxCmd[2]=0;
 
-  Serial3.flush();
-  rxSize = Serial3.readBytes(rxCmd,3);
-  Serial3.flush();
+  refSer.flush();
+  rxSize = refSer.readBytes(rxCmd,3);
+  refSer.flush();
 
   if (rxSize != rxLen)
   {
@@ -177,7 +198,7 @@ bool SetICSServoPos(uint8 id, uint16 pos) {
 }
 
 
-byte GetICSServoTemp(uint8 id) {
+byte GetICSServoTemp(HardwareSerial &refSer, uint8 id) {
   
   int rxSize;
   int rxLen = 3;
@@ -197,14 +218,16 @@ byte GetICSServoTemp(uint8 id) {
   txCmd[1] = 0x04;
 
   //TXビット　オン　/ RXビット　オフ
+  regmap2->CR1 = (regmap2->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000001000;
   regmap3->CR1 = (regmap3->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000001000;
   delay(10);
 
-  Serial3.flush();
-  Serial3.write(txCmd,2);
-  Serial3.flush();
+  refSer.flush();
+  refSer.write(txCmd,2);
+  refSer.flush();
 
   //TXビット　オフ　/ RXビット　オン
+  regmap2->CR1 = (regmap2->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000000100;
   regmap3->CR1 = (regmap3->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000000100;
   delay(10);
  
@@ -212,12 +235,13 @@ byte GetICSServoTemp(uint8 id) {
   rxCmd[1]=0;
   rxCmd[2]=0;
 
-  Serial3.flush();
-  rxSize = Serial3.readBytes(rxCmd,3);
-  Serial3.flush();
+  refSer.flush();
+  rxSize = refSer.readBytes(rxCmd,3);
+  refSer.flush();
 
-  if (rxSize != 3)
+  if (rxSize != rxLen)
   {
+    //Serial1.print("rxSize != rxLen error");
     //return false;
   }
 
