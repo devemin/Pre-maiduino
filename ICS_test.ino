@@ -20,7 +20,8 @@
 
 
 //シリアル通信レジスタ
-struct usart_reg_map *regmap = USART3_BASE;
+struct usart_reg_map *regmap1 = USART1_BASE;
+struct usart_reg_map *regmap3 = USART3_BASE;
 
 
 void setup() {
@@ -29,26 +30,27 @@ void setup() {
   //Bluetooth RN42 用通信設定
   Serial1.begin(115200);
 
-  //ICDサーボ設定　信号線を起動時500msec Highにすることで、シリアル通信になる（PWM ×）
-  digitalWrite(PB9, HIGH);
+  //ICSサーボ設定　信号線を起動時500msec Highにすることで、シリアル通信になる（PWM ×）
+  digitalWrite(PB10, HIGH);
   delay(505);
+  digitalWrite(PB10, LOW);
 
   //ICSサーボ通信設定 (8bit,even)
   Serial3.begin(1250000,SERIAL_8E1);
   Serial3.setTimeout(500);
 
-  //1-wire USART 用設定
-  pinMode(PB9, OUTPUT_OPEN_DRAIN);
+  //1-wire USART 用設定　逆に設定すると動かない、不要？
+  //pinMode(PB10, OUTPUT_OPEN_DRAIN);
 
   //HDSELビットをオンにし、1-wire USARTを有効にする
-  regmap->CR3 = regmap->CR3 | 0b00000000000000000000000000001000;
+  regmap3->CR3 = regmap3->CR3 | 0b00000000000000000000000000001000;
 
 
   //レジスタ表示デバッグ用
 /*
   //シリアル通信レジスタ
-  //regmap->SR;  //regmap->DR;  //regmap->BRR;  //regmap->CR1;
-  //regmap->CR2;  //regmap->CR3;  //regmap->GTPR;
+  //regmap3->SR;  //regmap3->DR;  //regmap3->BRR;  //regmap3->CR1;
+  //regmap3->CR2;  //regmap3->CR3;  //regmap3->GTPR;
 
   String tmpstr;
   int strsize=0;
@@ -56,37 +58,37 @@ void setup() {
   Serial1.print("USART1 register reading\r\n");
   ///////////////////////////////////////////////////////////////////////
   Serial1.print("Register  SR: 0b");
-  tmpstr = String(regmap->SR,BIN);
+  tmpstr = String(regmap3->SR,BIN);
   for (int a=tmpstr.length()-1; a<=50-1; a++) {    tmpstr = '0' + tmpstr;  }
   Serial1.print(tmpstr + "\r\n");
   ///////////////////////////////////////////////////////////////////////
   Serial1.print("Register  DR: 0b");
-  tmpstr = String(regmap->DR,BIN);
+  tmpstr = String(regmap3->DR,BIN);
   for (int a=tmpstr.length()-1; a<=50-1; a++) {    tmpstr = '0' + tmpstr;  }
   Serial1.print(tmpstr + "\r\n");
   ///////////////////////////////////////////////////////////////////////
   Serial1.print("Register BRR: 0b");
-  tmpstr = String(regmap->BRR,BIN);
+  tmpstr = String(regmap3->BRR,BIN);
   for (int a=tmpstr.length()-1; a<=50-1; a++) {    tmpstr = '0' + tmpstr;  }
   Serial1.print(tmpstr + "\r\n");
   ///////////////////////////////////////////////////////////////////////
   Serial1.print("Register CR1: 0b");
-  tmpstr = String(regmap->CR1,BIN);
+  tmpstr = String(regmap3->CR1,BIN);
   for (int a=tmpstr.length()-1; a<=50-1; a++) {    tmpstr = '0' + tmpstr;  }
   Serial1.print(tmpstr + "\r\n");
   ///////////////////////////////////////////////////////////////////////
   Serial1.print("Register CR2: 0b");
-  tmpstr = String(regmap->CR2,BIN);
+  tmpstr = String(regmap3->CR2,BIN);
   for (int a=tmpstr.length()-1; a<=50-1; a++) {    tmpstr = '0' + tmpstr;  }
   Serial1.print(tmpstr + "\r\n");
   ///////////////////////////////////////////////////////////////////////
   Serial1.print("Register CR3: 0b");
-  tmpstr = String(regmap->CR3,BIN);
+  tmpstr = String(regmap3->CR3,BIN);
   for (int a=tmpstr.length()-1; a<=50-1; a++) {    tmpstr = '0' + tmpstr;  }
   Serial1.print(tmpstr + "\r\n");
   ///////////////////////////////////////////////////////////////////////
   Serial1.print("RegisterGTPR: 0b");
-  tmpstr = String(regmap->GTPR,BIN);
+  tmpstr = String(regmap3->GTPR,BIN);
   for (int a=tmpstr.length()-1; a<=50-1; a++) {    tmpstr = '0' + tmpstr;  }
   Serial1.print(tmpstr + "\r\n");
   
@@ -138,7 +140,7 @@ bool SetICSServoPos(uint8 id, uint16 pos) {
   txCmd[2] = (pos & 0x007F); //POS_L
 
   //TXビット　オン　/ RXビット　オフ
-  regmap->CR1 = (regmap->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000001000;
+  regmap3->CR1 = (regmap3->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000001000;
   delay(10);
 
   Serial3.flush();
@@ -146,7 +148,7 @@ bool SetICSServoPos(uint8 id, uint16 pos) {
   Serial3.flush();
 
   //TXビット　オフ　/ RXビット　オン
-  regmap->CR1 = (regmap->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000000100;
+  regmap3->CR1 = (regmap3->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000000100;
   delay(10);
 
   rxCmd[0]=0;
@@ -195,7 +197,7 @@ byte GetICSServoTemp(uint8 id) {
   txCmd[1] = 0x04;
 
   //TXビット　オン　/ RXビット　オフ
-  regmap->CR1 = (regmap->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000001000;
+  regmap3->CR1 = (regmap3->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000001000;
   delay(10);
 
   Serial3.flush();
@@ -203,7 +205,7 @@ byte GetICSServoTemp(uint8 id) {
   Serial3.flush();
 
   //TXビット　オフ　/ RXビット　オン
-  regmap->CR1 = (regmap->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000000100;
+  regmap3->CR1 = (regmap3->CR1 & 0b111111111111111111111111111110011)  | 0b000000000000000000000000000000100;
   delay(10);
  
   rxCmd[0]=0;
