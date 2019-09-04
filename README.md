@@ -91,7 +91,7 @@ F102は本来RAMが10k なのですが、一応先ほどのArduino_STM32のフ�
 
 # ICSサーボを動かすには
 
-シリアル通信でバイト列を送れば良いのですが、<b>ライブラリを作りました。</b>
+ICSリファレンスマニュアルに沿って、シリアル通信でバイト列を送れば良いのですが、<b>ライブラリを作りました。</b>
 
 https://github.com/devemin/STM32-Arduino-ICSservo を Arduino IDEにて書き込みしてください。
 
