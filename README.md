@@ -135,6 +135,8 @@ Serial1.print("hoge");
 
 # ICS動作サンプル
 
+シリアル通信でバイト列を送れば良いのですが、ライブラリを作りました。
+
 https://github.com/devemin/STM32-Arduino-ICSservo を Arduino IDEにて書き込みしてください。
 
 # 近藤科学サーボ　公式ライブラリについて
