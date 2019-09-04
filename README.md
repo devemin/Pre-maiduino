@@ -23,38 +23,6 @@ Pre-maid AI x Arduino STM32 collaboration
 
 間違いや追加、動作報告などがありましたら、シェア致しますので是非お教えください(^^)
 
-# 参考情報
-
-超速ハックの @GOROman さんによる解析データです。ピンアサイン、基板回路写真もあります。
-
-https://docs.google.com/spreadsheets/d/1c6jqMwkBroCuF74viU_q7dgSQGzacbUW4mJg-957_Rs/edit#gid=191676625
-
-https://twitter.com/GOROman/status/1151046658354032640?s=19
-
-ST公式データシート
-
-https://www.stmcu.jp/stm32/stm32f102/
-
-F102 F103はピン配置は全く同じのようです（LQFP48）
-
-BluePill 回路図(ちなみに私の自作ボードは、このBluePillの103を102に載せかえたものです。)
-
-https://wiki.stm32duino.com/images/a/ac/Stm32f103c8t6_schematic.png
-
-ST公式　日本語リファレンス　文書番号0008
-
-https://www.stmcu.jp/design/document/reference_manual_j/
-
-Arduino STM32 リファレンス 日本語版　USART support(usart.h)
-
-https://scrapbox.io/ArduinoSTM32/USART_support(usart.h)
-
-ピン対応は、
-
-Arduino\arduino-1.8.8\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd32f103c\board\board.h
-
-に記載があります。
-
 # 環境構築
 
 書き換えに必要なものは、ST Linkというアダプタです。
@@ -214,6 +182,40 @@ https://www.stmcu.jp/design/document/reference_manual_j/
 # このページの注意点
 
 メーカー様に怒られない範囲で)ワクワク楽しくハックしていきたいと思います！
+
+# 参考情報
+
+超速ハックの @GOROman さんによる解析データです。ピンアサイン、基板回路写真もあります。
+
+https://docs.google.com/spreadsheets/d/1c6jqMwkBroCuF74viU_q7dgSQGzacbUW4mJg-957_Rs/edit#gid=191676625
+
+https://twitter.com/GOROman/status/1151046658354032640?s=19
+
+ST公式データシート
+
+https://www.stmcu.jp/stm32/stm32f102/
+
+F102 F103はピン配置は全く同じのようです（LQFP48）
+
+BluePill 回路図(ちなみに私の自作ボードは、このBluePillの103を102に載せかえたものです。)
+
+https://wiki.stm32duino.com/images/a/ac/Stm32f103c8t6_schematic.png
+
+ST公式　日本語リファレンス　文書番号0008
+
+https://www.stmcu.jp/design/document/reference_manual_j/
+
+Arduino STM32 リファレンス 日本語版　USART support(usart.h)
+
+https://scrapbox.io/ArduinoSTM32/USART_support(usart.h)
+
+ピン対応は、
+
+Arduino\arduino-1.8.8\hardware\Arduino_STM32-master\STM32F1\variants\generic_gd32f103c\board\board.h
+
+に記載があります。
+
+
 
 devemin
 
