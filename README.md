@@ -89,21 +89,13 @@ CPU Speed　は48MHz を選択。
 
 F102は本来RAMが10k なのですが、一応先ほどのArduino_STM32のフォルダの中のほうにboards.txt があり、そのなかで20480 を10240に変更できるようですが、どのように適用されるのかわかっていませんので、私は今はそのままにしています。
 
-# Arduino STM32のtips
+# ICSサーボを動かすには
 
-STM32 のArduinoは一部通常のArduinoと変数など扱いが異なる部分があるようです。
+シリアル通信でバイト列を送れば良いのですが、<b>ライブラリを作りました。</b>
 
-下記サイトではSTM32 Arduinoについてのリファレンスを翻訳されています。ありがたく参考にさせてもらいましょう！
+https://github.com/devemin/STM32-Arduino-ICSservo を Arduino IDEにて書き込みしてください。
 
-https://scrapbox.io/ArduinoSTM32/Arduino_STM32_%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88
-
-ちなみに、ArduinoでなくST社公式の「STM32CubeIDE」というソフトでも開発を進めることができます。
-
-@sabotenboy さんと@hanyazou さんの情報によると、先ほどのProgrammerソフトで確認すると個体によってはflashが128k の場合があるみたいです。
-
-私がDigikeyで買ったIC個体はスペック通り64kでした。
-
-https://twitter.com/Sabotenboy/status/1152479068165562368?s=19
+これで簡単にサーボを動かすことが出来ると思います。
 
 # シリアル通信について
 
@@ -133,11 +125,21 @@ Serial1.print("hoge");
 
 などでBluetooth 接続のホスト相手にデータを送信できるはずです。
 
-# ICS動作サンプル
+# Arduino STM32のtips
 
-シリアル通信でバイト列を送れば良いのですが、ライブラリを作りました。
+STM32 のArduinoは一部通常のArduinoと変数など扱いが異なる部分があるようです。
 
-https://github.com/devemin/STM32-Arduino-ICSservo を Arduino IDEにて書き込みしてください。
+下記サイトではSTM32 Arduinoについてのリファレンスを翻訳されています。ありがたく参考にさせてもらいましょう！
+
+https://scrapbox.io/ArduinoSTM32/Arduino_STM32_%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88
+
+ちなみに、ArduinoでなくST社公式の「STM32CubeIDE」というソフトでも開発を進めることができます。
+
+@sabotenboy さんと@hanyazou さんの情報によると、先ほどのProgrammerソフトで確認すると個体によってはflashが128k の場合があるみたいです。
+
+私がDigikeyで買ったIC個体はスペック通り64kでした。
+
+https://twitter.com/Sabotenboy/status/1152479068165562368?s=19
 
 # 近藤科学サーボ　公式ライブラリについて
 
