@@ -105,7 +105,7 @@ https://qiita.com/nanbuwks/items/5a01b924b192d5d36b31
 
 シリアル通信は、ST Linkで書き込む場合はSerial.begin でなく、Serial1.begin　などとして使います。
 
-Serial1, Serial2, Serial3 がUSART1-3 に対応しているかと思われます。（近藤科学サーボライブラリでは不明点あり、後述参照）
+Serial1, Serial2, Serial3 がUSART1-3 に対応しているかと思われます。
 
 # Bluetooth RN42
 
