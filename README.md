@@ -75,7 +75,15 @@ https://twitter.com/devemin/status/1150963921752215552?s=20
 
 Arduino IDE ディレクトリに、hardware/Arduino_STM32-master/ という形になるようにフォルダごとコピー。
 
-その後Arduino IDEを起動すると、メニューのツール→ボード　に「Generic STM32F103C series」が追加されていますので選択。
+その後Arduino IDEを起動
+
+ボードマネジャでインストール
+
+ツール → ボード → ボードマネジャで
+
+Arduino SAM Boards (32-bits ARM Coretex-M3) by Arduino を選ぶ
+
+すると、メニューのツール→ボード　に「Generic STM32F103C series」が追加されていますので選択。
 
 Variant は(20k RAM, 64K flash) の方を選択。
 
